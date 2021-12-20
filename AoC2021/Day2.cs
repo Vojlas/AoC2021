@@ -11,20 +11,21 @@ namespace AoC2021
     {
         public Day2()
         {
-            if (this.completed() != "advanced")
+            if (this.completed() == "none")
             {
                 GetPath();
                 solve(this.ConvertValues(ReadFile()));
             }
             else if (this.completed() == "simple")
             {
+                GetPath();
                 solveAdvanced(this.ConvertValues(ReadFile()));
             }
         }
 
         public override string completed()
         {
-            return "simple";
+            return "advanced";
         }
 
         public override string name()
@@ -45,6 +46,7 @@ namespace AoC2021
 
         private void solve(List<Tuple<string, int>> instructions)
         {
+            Console.WriteLine("Simple:");
             /*Commands:
              * forward X - increse horizontal position
              * down X - increse depth
@@ -83,9 +85,45 @@ namespace AoC2021
             Console.WriteLine($"output is {horizontalPosiotion * depth}");
             Clipboard.SetText((horizontalPosiotion * depth).ToString());
         }
-        private void solveAdvanced(object v)
+        private void solveAdvanced(List<Tuple<string, int>> instructions)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Advanced:");
+            /* Advanced:
+             * added aim = 0
+             *  down X increse aim by X
+             *  up   X decrese aim by X
+             *  forward X:
+             *      Increse horizontalPos by X
+             *      Increse depth by aim * X
+             *      
+             * Output: same (horizontalPos * depth)
+             */
+            int horizontalPosiotion = 0;
+            int depth = 0;
+            int aim = 0;
+
+            foreach (Tuple<string, int> inst in instructions)
+            {
+                switch (inst.Item1)
+                {
+                    case "forward":
+                        horizontalPosiotion += inst.Item2;
+                        depth += aim * inst.Item2;
+                        break;
+                    case "down":
+                        aim += inst.Item2;
+                        break;
+                    case "up":
+                        aim -= inst.Item2;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            Console.WriteLine($"Reached distance of {horizontalPosiotion} and current depth {depth}");
+            Console.WriteLine($"output is {horizontalPosiotion * depth}");
+            Clipboard.SetText((horizontalPosiotion * depth).ToString());
         }
     }
 }

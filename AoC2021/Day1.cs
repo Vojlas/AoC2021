@@ -12,11 +12,16 @@ namespace AoC2021
     {
         public Day1()
         {
-            if (this.completed() != "advanced")
+            if (this.completed() == "none")
             {
                 GetPath();
-                //solve(this.ConvertValues(ReadFile()));
-                solveAdvanced(this.ConvertValues(ReadFile())); 
+                solve(this.ConvertValues(ReadFile()));
+                
+            }
+            else if (this.completed() == "simple")
+            {
+                GetPath();
+                solveAdvanced(this.ConvertValues(ReadFile()));
             }
         }
 
