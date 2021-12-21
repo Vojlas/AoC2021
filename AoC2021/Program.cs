@@ -15,6 +15,7 @@ namespace AoC2021
             
             Day1 day1 = new Day1(); days.Add(day1);
             Day2 day2 = new Day2(); days.Add(day2);
+            Day3 day3 = new Day3(); days.Add(day3);
 
 
             foreach (Day day in days)
