@@ -23,9 +23,61 @@ namespace AoC2021
             }
         }
 
-        private void solveAdvanced(object v)
+        private void solveAdvanced(int[,] bits)
         {
-            throw new NotImplementedException();
+            /* Verify life support rating = oxygenRating * CO2 scubber rating
+             */
+            //int[,] test = new int[3, bits.GetLength(1)];
+            //for (int row = 0; row < 3; row++)
+            //{
+            //    for (int column = 0; column < bits.GetLength(1); column++)
+            //    {
+            //        test[row, column] = bits[row, column];
+            //    }
+            //}
+
+            int oxy = selectionProcces(bits, true);//most common, take 1
+            int Co2 = selectionProcces(bits, false); //least common, take 0
+
+            Console.WriteLine($"Oxygen: {oxy}, CO2: {Co2}");
+            Console.WriteLine($"Result is {oxy * Co2}");
+            Clipboard.SetText((oxy * Co2).ToString());
+        }
+
+        private int selectionProcces(int[,] bits, bool leastMmost) {
+            int count = 0;
+            List<int[]> BitList = bits.Cast<int>()
+                                .GroupBy(x => count++ / bits.GetLength(1))
+                                .Select(g => g.ToArray())
+                                .ToList();
+            count = 0;
+            do
+            {
+                int x = GetLeastMostBit(BitList, leastMmost, count);
+                BitList.RemoveAll(row => row[count] != x);
+                count++;
+            } while (BitList.Count() > 1 && count < bits.GetLength(1));
+
+            string binary = "";
+            foreach (int item in BitList.ElementAt(0))
+            {
+                binary += item;
+            }
+
+            return Convert.ToInt32(binary, 2);
+        }
+
+        private int GetLeastMostBit(List<int[]> bits, bool leastMost, int column) {
+            int common = 0;
+            int zero =0; int one = 0;
+            foreach (int[] item in bits)
+            {
+                if (item[column] == 1) one++;
+                if (item[column] == 0) zero++;
+            }
+            if (leastMost) { common = one >= zero ? 1 : 0; }
+            else { common = one >= zero ? 0 : 1; }
+            return common;
         }
 
         private void solve(int[,] bits)
@@ -85,7 +137,7 @@ namespace AoC2021
 
         public override string completed()
         {
-            return "simple";
+            return "advanced";
         }
 
         public override string name()

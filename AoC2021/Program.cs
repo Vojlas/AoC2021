@@ -18,6 +18,7 @@ namespace AoC2021
             Day3 day3 = new Day3(); days.Add(day3);
 
 
+            Console.WriteLine("\n");
             foreach (Day day in days)
             {
                 Console.WriteLine(day.name() + " - " + day.completed());
