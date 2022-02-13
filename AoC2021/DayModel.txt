@@ -1,0 +1,64 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace AoC2021
+{
+    class Day4 : Day
+    {
+        public override string completed()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string name()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Day4()
+        {
+
+            if (this.completed() == "none")
+            {
+                GetPath();
+                solve(this.ConvertValues(ReadFile()));
+            }
+            else if (this.completed() == "simple")
+            {
+                GetPath();
+                solveAdvanced(this.ConvertValues(ReadFile()));
+            }
+        }
+
+        private object ConvertValues(string[] vs)
+        {
+
+        }
+
+        private void solve(object x)
+        {
+            /*
+             */
+
+            //Console.WriteLine($"XXX is {}");
+            //Console.WriteLine($"Result is {}");
+            //Clipboard.SetText((xxx).ToString());
+        }
+
+        private void solveAdvanced(object x)
+        {
+            /*
+             */
+
+            //Console.WriteLine($"XXX is {}");
+            //Console.WriteLine($"Result is {}");
+            //Clipboard.SetText((xxx).ToString());
+        }
+
+
+    }
+}

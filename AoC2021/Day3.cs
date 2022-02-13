@@ -11,12 +11,12 @@ namespace AoC2021
     {
         public Day3()
         {
-            if (this.completed() == "none")
+            if (this.completed() == Status.none)
             {
                 GetPath();
                 solve(this.ConvertValues(ReadFile()));
             }
-            else if (this.completed() == "simple")
+            else if (this.completed() == Status.simple)
             {
                 GetPath();
                 solveAdvanced(this.ConvertValues(ReadFile()));
@@ -135,9 +135,9 @@ namespace AoC2021
             return BitsArray;
         }
 
-        public override string completed()
+        public override Status completed()
         {
-            return "advanced";
+            return Status.completed;
         }
 
         public override string name()

@@ -11,7 +11,7 @@ namespace AoC2021
     public abstract class Day
     {
         public string path = "";
-        public abstract string completed();
+        public abstract Status completed();
         public abstract string name();
 
 
@@ -21,6 +21,8 @@ namespace AoC2021
         
         public void GetPath()
         {
+            this.path = @"C:\Users\Vojtech\Desktop\input.txt";
+            return;
             OpenFileDialog dialog = new OpenFileDialog();
             if (DialogResult.OK == dialog.ShowDialog())
             {
